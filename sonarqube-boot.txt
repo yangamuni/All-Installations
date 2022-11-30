@@ -1,0 +1,12 @@
+#!/bin/bash
+sudo su
+yum update -y
+amazon-linux-extras install java-openjdk11 -y
+cd /opt
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.8.54436.zip
+unzip sonarqube-8.9.8.54436.zip
+useradd sonaradmin
+chown -R sonaradmin:sonaradmin /opt/sonarqube-8.9.8.54436
+su - sonaradmin
+cd /opt/sonarqube-8.9.8.54436/bin/linux-x86-64
+./sonar.sh start
