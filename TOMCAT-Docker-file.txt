@@ -1,0 +1,14 @@
+FROM amazonlinux
+MAINTAINER YANGAMUNI POLISETTY
+RUN yum update -y
+RUN yum install tar -y
+RUN yum install wget -y
+RUN yum install java-1.8.0-openjdk -y
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.81/bin/apache-tomcat-8.5.81.tar.gz
+RUN tar -xvf apache-tomcat-8.5.81.tar.gz
+Run rm -f apache-tomcat-8.5.81.tar.gz
+RUN mv apache-tomcat-8.5.81  /opt/tomcat8
+ADD  context.xml   /opt/tomcat8/webapps/manager/META-INF/context.xml
+ADD tomcat-users.xml  /opt/tomcat8/conf/tomcat-users.xml
+RUN chmod 777 -R /opt/tomcat8
+CMD ["/opt/tomcat8/bin/catalina.sh","run"]

@@ -1,0 +1,51 @@
+			Ansible Installation
+_______________________________________________________________________
+
+
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+yum install epel-release-latest-7.noarch.rpm -y
+
+yum update -y
+
+yum install git python python-devel python-pip openssl ansible -y
+
+ansible --version
+
+
+_______________________________________________________________________
+Ansible Server - Nodes connectivity
+_______________________________________________________________________
+
+cd /etc/ansible/           //defult Ansible default path
+ls -ltr
+
+vi ansible.cfg
+
+#sudo user =root  remove comment
+
+sudo user =root
+
+
+vi key.pem (from local copy the entaire key.pem and paste)
+
+chmod 600 key.pem
+
+Copy pem file from local to /home/ec2-user using winscp
+cp /home/ec2-user/key.pem  /etc/ansible/key.pem
+
+0r 
+
+
+
+
+vi hosts
+
+[master]
+54.205.63.235 ansible_user=ec2-user ansible_ssh_private_key_file=master.pem
+
+[nodes]
+34.233.119.233 ansible_user=ec2-user ansible_ssh_private_key_file=node.pem
+3.89.164.178 ansible_user=ec2-user ansible_ssh_private_key_file=node.pem
+
+
